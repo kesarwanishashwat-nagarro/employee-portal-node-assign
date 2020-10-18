@@ -1,0 +1,54 @@
+<% if (success && success!= '') { %>
+  <div class="alert alert-dismissible alert-success">
+    <div class="container">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong><%= success %></strong>.
+    </div>
+  </div>
+<% } %>
+<% if(failure && failure!= ''){ %>
+  <div class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <p class="mb-0"><%= failure %></p>
+  </div>
+<% } %>
+<div class="container landing">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <h1>List of Openings</h1>
+    </div>
+    <div class="col-12 col-lg-4 pull-right" style="text-align: right;">
+      <% if (user && user.role==='Manager') { %>
+      <button type="button" class="btn btn-info"><a style="color: #fff; text-decoration: none;" href="/opening/add"><i
+          class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Add New</a></button>
+      <% } %>
+    </div>
+  </div>
+  <div class="row">
+    <% openings.forEach(function(opening){ %>
+      <div class="card col-sm-3 mt-5 mr-lg-2">
+        <div class="card-body">
+          <h5 class="card-title"><%= opening.projectName %>
+            <% if (opening.isOpen) { %>
+            <span class="badge badge-success pull-right">Open</span>
+            <% } else {%>
+              <span class="badge badge-danger pull-right">Closed</span>
+            <% } %>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= opening.role %></h6>
+          <p class="card-text">
+            <% opening.technologies.forEach((tech) => { %>
+              <span class="badge badge-pill badge-dark"><%= tech %></span>
+            <% }); %>
+          </p>
+          <a href="<%= '/opening/view/' + opening.id %>" class="card-link">View</a>
+          <% if (user && user._id == opening.createdBy) { %>
+            <a href="<%= '/opening/update/' + opening.id %>" class="card-link">Edit</a>
+          <% } else if(!user || opening.isOpen) { %>
+            <a href="<%= user ? '/opening/apply/'+ opening.id : '/auth/login' %>" class="card-link">Apply</a>
+          <% } %>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>

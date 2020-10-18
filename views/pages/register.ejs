@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-lg-8 image bg-image"></div>
+        <div class="col-12 col-lg-4 p-0" style="position: relative;">
+            <% if(error){ %>
+            <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading">Warning!</h4>
+                <p class="mb-0"><%= error %></p>
+            </div>
+            <% } %>
+            <h3 class="text-center mt-3">Employee Portal</h1>
+            <form class="reg-form" method="POST" action="/auth/register">
+                <h2>Register</h2>
+                <h6>Please enter details below.</h6>
+                <div class="form-group mb-3">
+                    <input id="inputEmail" type="email" placeholder="Email address" required="" autofocus=""
+                        class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" name="email">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="inputName" type="text" placeholder="Fullname" required autofocus=""
+                        class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" name="name">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="inputPassword" type="password" placeholder="Password" required=""
+                        class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" name="password">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="inputCnfrmPassword" type="password" placeholder="Confirm Password" required=""
+                        class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" name="confirmpass">
+                </div>
+                <div class="form-group">
+                    <select class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" id="roleSelect"
+                        name="role">
+                        <option value="">Role</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Manager">Manager</option>
+                    </select>
+                </div>
+                <p class="error" id="pwdCnfrmError" style="display: none;">Both passwords do not match.</p>
+                <button type="submit" id="btnSubmit"
+                    class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign
+                    up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/auth/registerFE.js"></script>

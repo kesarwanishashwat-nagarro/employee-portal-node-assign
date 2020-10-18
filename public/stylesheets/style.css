@@ -1,0 +1,70 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+body, .sticky-footer-wrapper {
+  min-height:100vh;
+}
+
+.error{
+  color: red;
+}
+
+.error::before{
+  content: '*';
+}
+
+.flex-fill {
+  flex:1 1 auto;
+}
+
+
+.login,
+.image {
+  height: 250px;
+}
+
+
+.bg-image {
+  background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.outer-container{
+  margin: 0px;
+  max-width: 100%;
+  padding: 0px;
+}
+
+.profile-initial{
+  background: #6c757d;
+    padding: 5px 15px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.container.landing{
+  margin: 20px auto;
+}
+
+.reg-form{
+  margin-top: 30px; 
+  padding: 0px 40px;
+}
+
+@media (min-width: 768px){
+  .image {
+    height: 100vh;
+  }
+  .reg-form{
+    margin-top: 35%; 
+    padding: 0px 40px
+  }
+}

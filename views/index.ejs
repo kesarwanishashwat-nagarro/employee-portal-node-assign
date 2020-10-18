@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('./partials/head.ejs', {title: title || 'Employee portal'}) %>
+</head>
+
+<body>
+<div class="container outer-container">
+  <div class="d-flex flex-column sticky-footer-wrapper">
+    <% if (!hideNavbar) { %>
+      <%- include('./partials/top-navbar.ejs', { user: user}) %>
+    <% } %>
+    <main class="flex-fill">
+      <%- include(pageName, pageObj) %>
+    </main>
+    <% if (!hideNavbar) { %>
+      <%- include('./partials/footer.ejs') %>
+    <% } %>
+</div>
+</div>
+
+</body>
+
+</html>
