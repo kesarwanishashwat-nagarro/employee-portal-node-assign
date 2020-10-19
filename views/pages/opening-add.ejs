@@ -1,9 +1,9 @@
 <div class="container landing">
   <% if (failure && failure!= '') { %>
-    <div class="alert alert-dismissible alert-danger">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong><%= failure %>.</strong>
-    </div>
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong><%= failure %>.</strong>
+  </div>
   <% } %>
   <h1 class="text-center"><%= buttonLabel ? buttonLabel : 'View'%> Opening</h1>
   <form method="POST" class="mt-5" style="max-width: 500px; margin: 0 auto;" action="<%= action %>">
@@ -14,48 +14,50 @@
     <div class="form-group mb-3">
       <label for="inputPrjName" class="font-weight-bold text-info">Project Name: </label>
       <input id="inputPrjName" type="text" placeholder="Project Name" <%= disabled %> required="" autofocus=""
-        class="form-control shadow-sm px-4 text-primary" name="projectName" value="<%= typeof opening != 'undefined' ? opening.projectName : ''%>">
+        class="form-control shadow-sm px-4 text-primary" name="projectName"
+        value="<%= typeof opening != 'undefined' ? opening.projectName : ''%>">
     </div>
     <div class="form-group mb-3">
       <label for="inputClientName" class="font-weight-bold text-info">Client Name: </label>
       <input id="inputClientName" type="text" placeholder="Client Name" required autofocus="" <%= disabled %>
-        class="form-control shadow-sm px-4 text-primary" name="clientName" value="<%= typeof opening != 'undefined' ? opening.clientName : ''%>">
+        class="form-control shadow-sm px-4 text-primary" name="clientName"
+        value="<%= typeof opening != 'undefined' ? opening.clientName : ''%>">
     </div>
     <div class="form-group mb-3">
       <label for="inputTechnologies" class="font-weight-bold text-info">Technologies: </label>
       <input id="inputTechnologies" type="text" placeholder="Technologies (Comma Seperated)" required="" <%= disabled %>
-        class="form-control shadow-sm px-4 text-primary" name="technologies" value="<%= typeof opening != 'undefined' ? opening.technologies.toString() : ''%>">
+        class="form-control shadow-sm px-4 text-primary" name="technologies"
+        value="<%= typeof opening != 'undefined' ? opening.technologies.toString() : ''%>">
     </div>
     <div class="form-group mb-3">
       <label for="inputRole" class="font-weight-bold text-info">Role: </label>
       <input id="inputRole" type="text" placeholder="Role" required="" <%= disabled %>
-        class="form-control shadow-sm px-4 text-primary" name="role" value="<%= typeof opening != 'undefined' ? opening.role : ''%>">
+        class="form-control shadow-sm px-4 text-primary" name="role"
+        value="<%= typeof opening != 'undefined' ? opening.role : ''%>">
     </div>
     <div class="form-group mb-3">
       <label for="textAreaDesc" class="font-weight-bold text-info">Job Description: </label>
-      <textarea class="form-control shadow-sm px-4 text-primary" <%= disabled %>
-        placeholder="Job Description" id="textAreaDesc" rows="3" name="description">
+      <textarea class="form-control shadow-sm px-4 text-primary" <%= disabled %> placeholder="Job Description" id="textAreaDesc" rows="3" name="description">
         <%= typeof opening != 'undefined' ? opening.description.trim() : ''%>
       </textarea>
     </div>
     <div class="form-group">
       <label for="statusSelect" class="font-weight-bold text-info">Status: </label>
-      <select class="form-control shadow-sm px-4 text-primary" id="statusSelect"
-        name="isOpen" <%= disabled %>>
+      <select class="form-control shadow-sm px-4 text-primary" id="statusSelect" name="isOpen" <%= disabled %>>
         <%
           var options = [{ label: "Open", value: true}, { label: "Closed", value: false}];
           for ( var i = 0; i < options.length; i++ )
           {
               var selected = ( typeof opening != 'undefined' && opening.isOpen == options[i].value ) ? "selected" : ""; %>
-              <option value="<%= options[i].value %>" <%= selected %>><%= options[i].label %></option>
+        <option value="<%= options[i].value %>" <%= selected %>><%= options[i].label %></option>
         <% } %>
       </select>
     </div>
     <p class="error" id="pwdCnfrmError" style="display: none;">Both passwords do not match.</p>
     <% if(buttonLabel) { %>
-      <button type="submit" id="btnSubmit" class="btn btn-primary pull-right text-uppercase mb-2 shadow-sm">
-        <%= buttonLabel %>
-      </button>
+    <button type="submit" id="btnSubmit" class="btn btn-primary pull-right text-uppercase mb-2 shadow-sm">
+      <%= buttonLabel %>
+    </button>
     <% } %>
   </form>
 </div>
