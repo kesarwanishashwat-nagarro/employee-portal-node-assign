@@ -2,6 +2,13 @@ const opening = require('../shared/db-models/openingModel');
 
 module.exports = {
     /**
+     * Gets all the openings.
+     */
+    getAllOpenings: async () => {
+        return await opening.find();
+    },
+
+    /**
      * Adds an opening in DB.
      * @param  {} opening
      * @param  {string} createdBy

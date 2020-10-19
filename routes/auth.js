@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const user = require('../shared/models/userModel.js');
+const user = require('../shared/db-models/userModel.js');
 
 
 

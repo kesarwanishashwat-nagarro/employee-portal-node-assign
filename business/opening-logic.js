@@ -1,6 +1,12 @@
 const openingRepository = require('../repositories/opening-repository');
 
 module.exports = {
+    /**
+     * Gets all the openings.
+     */
+    getAllOpenings: async () => {
+        return await openingRepository.getAllOpenings();
+    },
     
     /**
      * Adding opening business logic.

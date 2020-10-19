@@ -1,8 +1,21 @@
 const openingLogic = require('../business/opening-logic');
-const openinglogic = require('../business/opening-logic');
-
+const Constants = require('../shared/constants');
 
 module.exports = {
+    /**
+     * Gets view with all the openings.
+     * @param  {Request} req
+     * @param  {Response} res
+     */
+    async allOpenings(req, res) {
+        const allOpenings = await openingLogic.getAllOpenings();
+        res.render('index', {
+            pageName: './pages/landing.ejs', pageObj: {
+                openings: allOpenings,
+                user: req.user
+            }, title: 'Employee portal', hideNavbar: false, user: req.user
+        });
+    },
 
     /**
      * Provides the opening form view for add/update
@@ -29,10 +42,10 @@ module.exports = {
     async addOpening(req, res) {
         const isAdded = await openinglogic.addOpening(req.body, req.user.id);
         if (isAdded) {
-            req.flash('success', 'New opening added succesfully');
+            req.flash(Constants.flashEvents.success, Constants.messages.openingAdded);
             res.redirect('/');
         } else {
-            req.flash('failure', 'Failed to save the opening, please try after some time.');
+            req.flash(Constants.flashEvents.failure, Constants.messages.addFailed);
             res.redirect('/opening/add');
         }
     },
@@ -85,10 +98,10 @@ module.exports = {
     async updateOpening(req, res) {
         const isUpdated = await openingLogic.updateOpening(req.params.id, req.body);
         if (isUpdated) {
-            req.flash('success', 'Opening modified succesfully.');
+            req.flash(Constants.flashEvents.success, Constants.messages.updateSuccess);
             res.redirect('/');
         } else {
-            req.flash('failure', 'Unable to update the opening, Please try again later.');
+            req.flash(Constants.flashEvents.failure, Constants.messages.updateFailed);
             res.redirect('/opening/update/' + req.params.id);
         }
     }

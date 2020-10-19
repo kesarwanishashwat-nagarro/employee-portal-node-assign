@@ -4,10 +4,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var routing = require('./routes/routing');
 const mongoose = require('mongoose');
-const errorHandler = require('./middlewares/errorHandler')
+const errorHandler = require('./middlewares/errorHandler');
+const Constants = require('./shared/constants')
 var app = express();
 
-mongoose.connect("mongodb+srv://root:poi098poi@employeeportal.xu127.azure.mongodb.net/empPortal?retryWrites=true&w=majority", {
+mongoose.connect(Constants.conString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
@@ -24,10 +25,6 @@ app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routing);
-// app.use('/users', usersRouter);
-// app.use('/auth', authRouter);
-
-
 
 // error handler
 app.use(errorHandler);
