@@ -1,16 +1,17 @@
-<div class="container-fluid">
+<div class="container-fluid register">
     <div class="row">
-        <div class="col-12 col-lg-8 image bg-image"></div>
-        <div class="col-12 col-lg-4 p-0" style="position: relative;">
-            <% if(error){ %>
-            <div class="alert alert-dismissible alert-warning">
+        <div class="col-12 col-sm-8 image bg-image"></div>
+        <div class="col-12 col-sm-4 p-0" style="position: relative;">
+            <div class="alert alert-dismissible alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <h4 class="alert-heading">Warning!</h4>
-                <p class="mb-0"><%= error %></p>
+                <strong class="text"></strong>.
             </div>
-            <% } %>
+            <div class="alert alert-dismissible alert-warning" id="validation-ribbon">
+                <button type="button" class="close">&times;</button>
+                <p class="mb-0 text"></p>
+            </div>
             <h3 class="text-center mt-3">Employee Portal</h1>
-            <form class="reg-form" method="POST" action="/auth/register">
+            <form class="reg-form" id="registerSubmit">
                 <h2>Register</h2>
                 <h6>Please enter details below.</h6>
                 <div class="form-group mb-3">
@@ -41,6 +42,9 @@
                 <button type="submit" id="btnSubmit"
                     class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign
                     up</button>
+                <div style="margin: 0 auto; text-align: center; font-size: 14px;">
+                    Already Registered? <a href="/auth/login">Login now</a>
+                </div>
             </form>
         </div>
     </div>

@@ -8,11 +8,13 @@ const errorHandler = require('./middlewares/errorHandler');
 const Constants = require('./shared/constants')
 var app = express();
 
-mongoose.connect(Constants.conString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-}).then(() => console.log('DB Connected'));
+if(process.env.NODE_ENV !== 'test'){
+  mongoose.connect(Constants.conString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  }).then(() => console.log('DB Connected'));
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

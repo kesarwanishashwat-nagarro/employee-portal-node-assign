@@ -4,12 +4,13 @@ const router = express.Router();
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const indexRouter = require('./index');
-const usersRouter = require('./users');
-const authRouter = require('./auth');
-const openingRouter = require('./opening');
+const indexRouter = require('./pageRoute/index');
+const pageRouter = require('./pageRoute/pageRouter');
+const apiRouter = require('./api/apiRouter');
+// const authRouter = require('./auth');
+// const openingRouter = require('./opening');
 const authStrategy = require("../shared/authStrategy");
-const checkAuth = require('../middlewares/checkAuth');
+// const checkAuth = require('../middlewares/checkAuth');
 const flashCallback = require('../middlewares/flashCallbackHandler');
 
 router.use(session({
@@ -25,11 +26,12 @@ authStrategy();
 router.use(flashCallback);
 
 // Parent routes
-router.use('/', indexRouter);
-router.use('/users', usersRouter);
-router.use('/auth', authRouter);
-router.use('/opening',checkAuth, openingRouter);
-router.use('*', indexRouter);
+// router.use('/', indexRouter);
+// router.use('/auth', authRouter);
+// router.use('/opening',checkAuth, openingRouter);
+router.use('/', pageRouter);
+router.use('/api', apiRouter);
+router.use('*', pageRouter);
 
 
 // catch 404 and forward to error handler

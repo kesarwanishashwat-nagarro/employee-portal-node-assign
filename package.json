@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "mocha test/**/*.test.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -13,10 +14,18 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.10.9",
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.0",
+    "mongodb-memory-server": "^6.9.2",
+    "supertest": "^5.0.0"
   }
 }

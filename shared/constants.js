@@ -3,7 +3,8 @@ class Constants {
 
     static flashEvents = {
         success: "success",
-        failure: 'failure'
+        failure: 'failure',
+        error: 'error'
     };
 
     static messages = {

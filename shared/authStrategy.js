@@ -14,7 +14,7 @@ module.exports = () => {
                 bcrypt.compare(password, data.password, (err, match) => {
                     if(!match){
                         console.log('no match');
-                        return done('Not authenticated', false, { message: "Username/Password do not match."})
+                        return done(null, false, { message: "Username/Password do not match."})
                     } else {
                         console.log('matched');
                         return done(null, data);
@@ -22,6 +22,7 @@ module.exports = () => {
                 })
             })
         } catch(err){
+            console.log(err);
             done(null, false)
         }
     }));
