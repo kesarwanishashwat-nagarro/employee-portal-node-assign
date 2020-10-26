@@ -1,12 +1,16 @@
 <div class="container landing">
-  <% if (failure && failure!= '') { %>
   <div class="alert alert-dismissible alert-danger">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong><%= failure %>.</strong>
+    <button type="button" class="close">&times;</button>
+    <strong class="text"></strong>
   </div>
-  <% } %>
+  <div class="alert alert-dismissible alert-success">
+    <div class="container">
+      <button type="button" class="close">&times;</button>
+      <strong class="text"></strong>
+    </div>
+  </div>
   <h1 class="text-center"><%= buttonLabel ? buttonLabel : 'View'%> Opening</h1>
-  <form method="POST" class="mt-5" style="max-width: 500px; margin: 0 auto;" action="<%= action %>">
+  <form class="mt-5" style="max-width: 500px; margin: 0 auto;" id="openingForm">
     <% if(typeof isView == 'undefined' || !isView) { %>
     <h6 class="font-weight-bold mb-3 mt-3">Please enter the details below.</h6>
     <% }%>
@@ -37,8 +41,9 @@
     </div>
     <div class="form-group mb-3">
       <label for="textAreaDesc" class="font-weight-bold text-info">Job Description: </label>
-      <textarea class="form-control shadow-sm px-4 text-primary" <%= disabled %> placeholder="Job Description" id="textAreaDesc" rows="3" name="description">
-        <%= typeof opening != 'undefined' ? opening.description.trim() : ''%>
+      <textarea class="form-control shadow-sm px-4 text-primary" <%= disabled %> placeholder="Job Description"
+        id="textAreaDesc" rows="3" name="description">
+        <%= typeof opening != 'undefined' ? opening.description && opening.description.trim() : ''%>
       </textarea>
     </div>
     <div class="form-group">
@@ -61,3 +66,4 @@
     <% } %>
   </form>
 </div>
+<script src="/javascripts/openingFE.js"></script>

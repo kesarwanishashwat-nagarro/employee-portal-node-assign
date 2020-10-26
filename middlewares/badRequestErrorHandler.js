@@ -8,6 +8,7 @@ module.exports = function(req, res, next) {
             status: 'failed',
             errors: errors.array().map((err) => { return { field: err.param, message: err.msg } }) 
         }).send(res);
+    } else {
+        next();
     }
-    next();
 }

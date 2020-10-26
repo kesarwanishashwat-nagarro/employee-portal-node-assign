@@ -6,32 +6,19 @@ module.exports = {
      * @param  {string} userId
      */
     getUserById: async (userId) => {
-        try {
-            return await user.findById(userId)
-        } catch (error) {
-            return false
-        }
+        return await user.findById(userId)
     },
     
     /**Retrieves user based on email.
      * @param  {string} email
      */
     getUserByEmail: async (email) => {
-        try {
-            return await user.findOne({ email: email });
-        } catch (error) {
-            return null;
-        }
+        return await user.findOne({ email: email });
     },
     /**Adds a user.
      * @param  {} userObj
      */
     addUser: async (userObj) => {
-        try {
-            await user(userObj).save();
-            return true;
-        } catch (error) {
-            return false;
-        }
+        return await user(userObj).save();
     }
 }

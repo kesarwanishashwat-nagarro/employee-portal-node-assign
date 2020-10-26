@@ -69,7 +69,7 @@ module.exports = {
      */
     updateOpening: async (openingId, opening) => {
         opening.technologies = opening.technologies.split(',').map((tech) => tech.trim());
-        opening.description = opening.description.trim();
+        opening.description = opening.description && opening.description.trim();
         return await openingRepository.updateOpening(openingId, opening);
     }
 }

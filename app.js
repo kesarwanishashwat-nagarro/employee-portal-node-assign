@@ -1,14 +1,14 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var routing = require('./routes/routing');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const routing = require('./routes/routing');
 const mongoose = require('mongoose');
 const errorHandler = require('./middlewares/errorHandler');
 const Constants = require('./shared/constants')
-var app = express();
+const app = express();
 
-if(process.env.NODE_ENV !== 'test'){
+if (process.env.NODE_ENV !== 'test') {
   mongoose.connect(Constants.conString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,9 +23,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cookieParser('secret'));
 app.use('/', routing);
 
 // error handler

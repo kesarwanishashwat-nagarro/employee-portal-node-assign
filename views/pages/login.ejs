@@ -2,14 +2,12 @@
     <div class="row">
         <div class="col-sm-8 image bg-image"></div>
         <div class="col-sm-4 p-0" style="position: relative;">
-            <% if(error && error!= '') {%>
-                <div class="alert alert-dismissible alert-warning">
-                    <button type="button" class="close">&times;</button>
-                    <p class="mb-0 text"><%= error %></p>
-                </div>
-            <% } %>
-            <h3 class="text-center mt-3">Employee Portal</h1>
-            <form class="reg-form" method="POST" action="/api/auth/login">
+            <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="close">&times;</button>
+                <p class="mb-0 text"></p>
+            </div>
+            <h3 class="text-center mt-3">Employee Portal</h3>
+            <form class="reg-form" id="loginForm">
                 <h2>Login</h2>
                 <h6>Please enter your login credentials.</h6>
                 <div class="form-group mb-3">
@@ -24,7 +22,7 @@
                     <input id="customCheck1" type="checkbox" checked class="custom-control-input">
                     <label for="customCheck1" class="custom-control-label">Remember password</label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign
+                <button type="submit" id="btnSubmit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign
                     in</button>
             </form>
             <div style="margin: 0 auto; text-align: center; font-size: 14px;">

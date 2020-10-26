@@ -1,18 +1,25 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { body } = require('express-validator');
 const passport = require('passport');
 const BadRequestErrorHandler = require('../../middlewares/badRequestErrorHandler');
 const userRepository = require('../../repositories/user-repository');
 const authController = require('../../controllers/auth-controller');
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        failureRedirect: '/auth/login',
-        successRedirect: '/',
-        failureFlash: true
-    })(req, res, next);
-});
+router.post('/login', [
+    body('email')
+        .notEmpty()
+        .isEmail()
+        .withMessage('valid email is required'),
+    body('password')
+        .notEmpty()
+        .withMessage('password is required')
+], BadRequestErrorHandler, (req, res, next) => {
+    passport.authenticate('login',
+        { session: false },
+        (err, user, info) => authController.loginUser(user, req, res, info)
+    )(req, res, next);
+})
 
 
 router.post('/register', [

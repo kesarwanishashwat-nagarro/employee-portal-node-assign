@@ -1,17 +1,13 @@
-<% if (success && success!= '') { %>
   <div class="alert alert-dismissible alert-success">
     <div class="container">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong><%= success %></strong>.
+      <button type="button" class="close">&times;</button>
+      <strong class="text"></strong>.
     </div>
   </div>
-<% } %>
-<% if(failure && failure!= ''){ %>
   <div class="alert alert-dismissible alert-warning">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <p class="mb-0"><%= failure %></p>
+      <button type="button" class="close">&times;</button>
+      <p class="mb-0 text"></p>
   </div>
-<% } %>
 <div class="container landing">
   <div class="row">
     <div class="col-12 col-lg-8">
@@ -45,10 +41,11 @@
           <% if (user && user._id == opening.createdBy) { %>
             <a href="<%= '/opening/update/' + opening.id %>" class="card-link">Edit</a>
           <% } else if(!user || opening.isOpen) { %>
-            <a href="<%= user ? '/opening/apply/'+ opening.id : '/auth/login' %>" class="card-link">Apply</a>
+            <a href="#" data-openingId="<%= opening.id%>" class="card-link apply">Apply</a>
           <% } %>
         </div>
       </div>
     <% }); %>
   </div>
 </div>
+<script src="/javascripts/overviewFE.js"></script>

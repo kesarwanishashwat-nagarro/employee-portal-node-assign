@@ -8,9 +8,9 @@ module.exports = {
      */
     async registerUser(user) {
         const { email, name, password, role } = user;
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(password, salt);
-        return await userRepository.addUser({ email, name, password: hash, role });
+        // const salt = await bcrypt.genSalt(10);
+        // const hash = await bcrypt.hash(password, salt);
+        return await userRepository.addUser({ email, name, password, role });
 
     }
 }

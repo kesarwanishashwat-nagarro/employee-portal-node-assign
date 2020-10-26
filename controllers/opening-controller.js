@@ -1,5 +1,6 @@
 const openingLogic = require('../business/opening-logic');
 const Constants = require('../shared/constants');
+const apiResponse = require('../shared/utilities/api-response');
 
 module.exports = {
     /**
@@ -27,7 +28,9 @@ module.exports = {
     addOpeningView(req, res, next, pageBinding = null) {
         res.render('index', {
             pageName: './pages/opening-add.ejs',
-            pageObj: pageBinding || { buttonLabel: 'Add', action: '/opening/add' },
+            pageObj: pageBinding || {
+                buttonLabel: 'Add'
+            },
             title: 'Employee portal | Opening',
             hideNavbar: false,
             user: req.user
@@ -40,13 +43,17 @@ module.exports = {
      * @param  {Response} res
      */
     async addOpening(req, res) {
-        const isAdded = await openinglogic.addOpening(req.body, req.user.id);
+        const isAdded = await openingLogic.addOpening(req.body, req.user.id);
         if (isAdded) {
-            req.flash(Constants.flashEvents.success, Constants.messages.openingAdded);
-            res.redirect('/');
+            return new apiResponse(200, null, {
+                status: 'success',
+                message: 'Opening is succesfully created'
+            }).send(res);
         } else {
-            req.flash(Constants.flashEvents.failure, Constants.messages.addFailed);
-            res.redirect('/opening/add');
+            new apiResponse(500, null, {
+                status: 'failure',
+                errors: [{ message: 'Failed to create the opening, Please try again' }]
+            }).send(res);
         }
     },
 
@@ -56,13 +63,18 @@ module.exports = {
      * @param  {Response} res
      */
     async applyOpening(req, res) {
-        const applyObj = await openinglogic.applyOpening(req.params.id, req.user.id);
+        const applyObj = await openingLogic.applyOpening(req.params.id, req.user.id);
         if (applyObj && applyObj.isSuccess) {
-            req.flash('success', applyObj.msg);
+            return new apiResponse(200, null, {
+                status: 'success',
+                message: applyObj.msg
+            }).send(res);
         } else {
-            req.flash('failure', applyObj.msg);
+            new apiResponse(409, null, {
+                status: 'failure',
+                errors: [{ message: applyObj.msg }]
+            }).send(res);
         }
-        res.redirect('/');
     },
 
     /**
@@ -76,7 +88,6 @@ module.exports = {
         if (opening) {
             let pageBinding = {
                 buttonLabel: false,
-                action: '/opening/update/' + opening.id,
                 opening: opening,
                 isView: true
             };
@@ -98,11 +109,15 @@ module.exports = {
     async updateOpening(req, res) {
         const isUpdated = await openingLogic.updateOpening(req.params.id, req.body);
         if (isUpdated) {
-            req.flash(Constants.flashEvents.success, Constants.messages.updateSuccess);
-            res.redirect('/');
+            return new apiResponse(200, null, {
+                status: 'success',
+                message: 'Opening is succesfully updated'
+            }).send(res);
         } else {
-            req.flash(Constants.flashEvents.failure, Constants.messages.updateFailed);
-            res.redirect('/opening/update/' + req.params.id);
+            new apiResponse(500, null, {
+                status: 'failure',
+                errors: [{ message: 'Failed to update the opening, Please try again' }]
+            }).send(res);
         }
     }
 }

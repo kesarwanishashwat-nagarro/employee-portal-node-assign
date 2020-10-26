@@ -1,6 +1,7 @@
 const authLogic = require('../business/auth-logic');
 const Constants = require('../shared/constants');
 const apiResponse = require('../shared/utilities/api-response');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     /**Returns the login page view.
@@ -43,8 +44,34 @@ module.exports = {
      */
     async registerUser(req, res) {
         await authLogic.registerUser(req.body);
-            return new apiResponse(200, null, {
-                status: 'success'
+        return new apiResponse(200, null, {
+            status: 'success'
+        }).send(res);
+    },
+
+    async loginUser(user, req, res, info) {
+        if (info) {
+            return new apiResponse(401, null, {
+                status: 'failed',
+                errors: [{ message: info.message }]
             }).send(res);
+        } else {
+            await req.login(user, async (error) => {
+                if (error) {
+                    console.log(error);
+                    throw error
+                };
+            
+                const userObj = { _id: req.user._id, email: req.user.email };
+                const token = jwt.sign({
+                    user: userObj
+                }, 'NAGP');
+                res.cookie('token', token, { httpOnly: true })
+
+                return new apiResponse(200, { token }, {
+                    status: 'success'
+                }).send(res);
+            });
+        }
     }
 }

@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-const checkAuth = require('../../middlewares/checkAuth');
+const express = require('express');
+const router = express.Router();
+const checkAuthPage = require('../../middlewares/checkAuthPage');
 const openingController = require('../../controllers/opening-controller');
 
 /* GET home page. */
-router.get('/', checkAuth, openingController.allOpenings);
+router.get('/', checkAuthPage, openingController.allOpenings);
 
 module.exports = router;
